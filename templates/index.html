@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Análisis Térmico</title>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Hoja de Estilos -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Dashboard de Análisis Térmico</h1>
+    </header>
+
+    <main class="container">
+        <!-- 1. Gráfica Temporal -->
+        <section class="card full-width">
+            <h2>Evolución Temporal de Temperaturas</h2>
+            <div id="temporal-plot" class="plot-container"></div>
+        </section>
+
+        <!-- Contenedor para detalles de un dataset -->
+        <section class="card-deck">
+            <!-- 2. Gráfica 3D y Controles -->
+            <div class="card main-view">
+                <div class="card-header">
+                    <h2 id="dataset-filename">Cargando...</h2>
+                    <div class="controls">
+                        <button id="btn-prev">< Anterior</button>
+                        <span id="dataset-counter"></span>
+                        <button id="btn-next">Siguiente ></button>
+                    </div>
+                </div>
+                <div id="plot-3d" class="plot-container"></div>
+                 <div class="stats-grid">
+                    <div class="stat-item">
+                        <span>Temp. Mínima</span>
+                        <strong id="stats-min">-.-- °C</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Temp. Máxima</span>
+                        <strong id="stats-max">-.-- °C</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Temp. Promedio</span>
+                        <strong id="stats-avg">-.-- °C</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Gráfica 2D -->
+            <div class="card side-view">
+                <h2>Mapa de Temperatura 2D</h2>
+                <div id="plot-2d" class="plot-container"></div>
+            </div>
+        </section>
+        
+        <!-- 4. Gráficas Adicionales -->
+        <section class="card-deck">
+             <div class="card">
+                <h2>Distribución de Temperatura (Histograma)</h2>
+                <div id="histogram-plot" class="plot-container"></div>
+            </div>
+            <div class="card">
+                <h2>Mapa de Gradiente Térmico</h2>
+                <div id="gradient-plot" class="plot-container"></div>
+            </div>
+            <div class="card">
+                <h2>Región de Interés (Puntos >95% del Máx)</h2>
+                <div id="roi-plot" class="plot-container"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Nuestro Script -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
